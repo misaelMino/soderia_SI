@@ -1,0 +1,25 @@
+.botoncito {
+    background-color: #6b419c; 
+    color: #FFFFFF; 
+    padding: 5px; 
+    text-align: center; 
+    border-radius: 5px; 
+    text-decoration: none; 
+  
+    transition: background-color 0.3s ease, transform 0.3s ease; 
+    display: inline-block; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+}
+
+.botoncito:hover {
+    background-color: #190036; 
+    color: #c5c5c5;
+    transform: translateY(-2px); 
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15); 
+    text-decoration: none; 
+}
+
+.titulo {
+    background-color: #373193;
+    color: #FFFFFF;
+  }

@@ -1,0 +1,73 @@
+<link rel="stylesheet" href="../../../front/src/templates/clientes/clientesCSS.css">
+<link rel="stylesheet" href="../../../front/src/templates/header/header-dashboard.css">
+<link rel="stylesheet" href="../../../front/src/templates/buttons/botoncitos.css">
+
+<div class="container">
+
+    <div class="text-center pruebitaheader">
+        <p class="">Productos</p>
+    </div>
+
+    <div class="container mt-5">
+
+
+        <!-- Barra de búsqueda y filtro -->
+        <div class="row mb-3">
+            <div class="col">
+                <input type="text" class="form-control" placeholder="Buscar por código, descripción...">
+            </div>
+            <div class="col-auto">
+                <button class="btn btn-primary">Buscar</button>
+            </div>
+        </div>
+
+        <!-- Tabla de productos -->
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover">
+                <thead class="table-primary text-center">
+                    <tr>
+                        <th class="col-md-1">Código</th>
+                        <th class="col-md-5">Descripción</th>
+                        <th>Volumen (litros)</th>
+                        <th class="">Stock</th>
+                        <th>Depósito</th>
+                        <th>En circulación</th>
+                        <th>Precio</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="productosBody">
+                    <!-- Filas de productos dinámicas -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Botones de acciones -->
+        <div class="row">
+            <div class="col-md-6">
+                <div class="d-flex mt-4">
+                    <button class="btn btn-success me-2">Agregar producto</button>
+                    <button class="btn btn-danger">Eliminar producto</button>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="d-flex justify-content-end mt-4">
+                    <label for="combo">Lista:</label>
+                    <select id="combo" name="combo">
+                        <option value="lista1">Minorista</option>
+                        <option value="lista2">Mayorista</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+
+</div>
+
+<link rel="stylesheet" href="./src/modulosGral.css">

@@ -1,0 +1,54 @@
+<link rel="stylesheet" href="../../../front/src/templates/clientes/clientesCSSpedidos.css">
+<link rel="stylesheet" href="../../../front/src/templates/header/header-dashboard.css">
+<link rel="stylesheet" href="../../../front/src/templates/buttons/botoncitos.css">
+
+
+<!-- Página principal -->
+<div class="pedidos align-items-center">
+  <div class="text-center header-tittlee header-fontt pruebitaheader">
+    <p class="qo-productos">Pedidos</p>
+  </div>
+
+  <div class="container">
+    <div class="container d-flex justify-content-center">
+      <input type="search" class="form-control rounded pruebera22 barra-busqueda" placeholder="Buscar pedidos" aria-label="Search" aria-describedby="search-addon" />
+      <button type="button" class="btn generar-btn" data-mdb-ripple-init>Buscar</button>
+    </div>
+    <br><br>
+
+    <ul class="responsive-table">
+      <li class="table-header">
+        <div class="col col-1">Nº Pedido</div>
+        <div class="col col-2">Cliente</div>
+        <div class="col col-3">Barrio</div>
+        <div class="col col-4">Fecha de reparto</div>
+        <div class="col col-5 text-center">Pedidos del cliente</div>
+      </li>
+      <!-- Aquí van las filas de pedidos -->
+      <li class="table-row">
+        <div class="col col-1" data-label="Nº Pedido">6</div>
+        <div class="col col-2" data-label="Cliente">Aguas Villa Maria SRL</div>
+        <div class="col col-3" data-label="Barrio">Parque Industrial</div>
+        <div class="col col-4" data-label="Fecha Pactada">18/10/2024</div>
+        <a href="#" class="col col-5 botoncito">Ver Pedidos</a>
+      </li>
+      <li class="table-row">
+        <div class="col col-1" data-label="Nº Pedido">3</div>
+        <div class="col col-2" data-label="Cliente">Alberto Druetta</div>
+        <div class="col col-3" data-label="Barrio">La Madrid</div>
+        <div class="col col-4" data-label="Fecha Pactada">19/10/2024</div>
+        <a href="#" class="col col-5 botoncito">Ver Pedidos</a>
+      </li>
+      <!-- Más filas aquí -->
+
+    
+      <button type="button" class="btn generar-btn mt-4" data-modal-ref="Generar">Crear nuevo pedido</button>
+      <button type="button" class="btn generar-btn mt-4" data-modal-ref="Modificar">Modificar pedido</button>
+
+    </ul>
+  </div>
+</div>
+
+<div id="content" class="container">
+    
+</div>
