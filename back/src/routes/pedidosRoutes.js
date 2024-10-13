@@ -1,10 +1,14 @@
 const express = require('express');
 const router = express.Router();
-const clienteController = require('../controllers/clienteController'); 
+const pedidoController = require('../controllers/pedidoController'); 
 
 
 
 router.post('/add', (req, res) => {
+
     const data = req.body; 
-    clienteController.addCliente(req, res); 
+    debugger;
+    pedidoController.addPedido(req, res); 
 });
+
+module.exports = router;
