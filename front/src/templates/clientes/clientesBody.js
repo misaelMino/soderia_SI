@@ -50,7 +50,7 @@ export function deleteClient(button) {
 
 export async function getClientes() {
   try {
-      const response = await fetch('http://localhost:4000/clientes');  // Hacer la solicitud al backend
+      const response = await fetch('http://localhost:4000/clientes/get');  // Hacer la solicitud al backend
       if (!response.ok) {
           throw new Error('Error al obtener los clientes');  // Manejar errores de respuesta
       }
@@ -61,20 +61,13 @@ export async function getClientes() {
       console.error('Error al obtener los clientes:', error);  // Mostrar el error en la consola
   }
 }
-  
-  
 
 function cargarClientes(datos) {
     //nombre, appelido, cuenta, barrio, direccion
-
     const clientTableBody = document.getElementById('clientTableBody');
-
-
-
     datos.forEach(data => {
         const newRow = document.createElement('li');
         newRow.classList.add('table-row');
-
         newRow.innerHTML = `
         <div class="col col-1 text-start" data-label="Nombre">${data.Nombre}</div>
         <div class="col col-2 text-start" data-label="Apellido">${data.Apellido}</div>
@@ -84,12 +77,8 @@ function cargarClientes(datos) {
         <div class="col col-6 text-center" data-label="Cuenta corriente"><a href="" class="col col-5 botoncito">Ver</a></div>
         <div class="col col-7 text-center" data-label="Estado">-</div>
     `;
-
         clientTableBody.appendChild(newRow);
-
         document.getElementById('addClientForm').classList.add('d-none');
     });
- 
-
 }
 
