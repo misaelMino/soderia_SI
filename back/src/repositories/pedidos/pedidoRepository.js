@@ -44,22 +44,45 @@ const addPedido = async (data, detallePedido) => {
         throw error;
     }
 };
+//DELETE ProductosXPedidos
+//WHERE IdPedido=?;
 
-
-const updatePedido = async (data) => {
+const updatePedido = async (detallePedido) => {
     const connection = await database.getConnection();
-    const result = await connection.query(
-        `UPDATE cliente 
-        SET Nombre = ?, Apellido = ?, Direccion = ?, DNI = ?, Telefono = ?, IdBarrio = ?, IdTipoDoc = ?
-        WHERE IdCliente = 1;`,
-        [data.Nombre, data.Apellido, data.Direccion, data.DNI, data.Telefono, data.IdBarrio, data.IdTipoDoc]
-    );
+    const IdPedido = detallePedido.IdPedido;
+    const arrayProductoXPedido = detallePedido.producto;
+    console.log(arrayProductoXPedido);
+
+    try {
+        await connection.beginTransaction();
+        
+        // Elimino los productos que no estan en la actualizacion
+        await connection.query(
+            `DELETE FROM ProductoXPedido
+            WHERE IdPedido = ?
+            AND IdProducto NOT IN (?);`,
+            [IdPedido, arrayProductoXPedido.map(producto => producto.IdProducto)]
+        );
+        // Iterar sobre los productos y realizar UPDATE o INSERT. Si existe updatea y si no inserta. cortina la bochina
+        const productoQueries = arrayProductoXPedido.map((producto) => {
+            return connection.query(
+                `INSERT INTO ProductoXPedido (IdPedido, IdProducto, cantidadPedido)
+                VALUES (?, ?, ?)
+                ON DUPLICATE KEY UPDATE cantidadPedido = VALUES(cantidadPedido);`,
+                [IdPedido, producto.IdProducto, producto.cantidadPedido]
+            );
+        });
+        await Promise.all(productoQueries);
+        await connection.commit();
+    } catch (error) {
+        await connection.rollback();
+        throw error; 
+    }
 };
 
-const deletePedido = async (data) =>{
 
-
-
+const deletePedido = async (data) => {
+//baja logica del sistema, no lo muestro mais
 
 };
 
