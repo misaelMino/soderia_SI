@@ -16,7 +16,7 @@ function navigate(page) {
         case 'clientes':
             // Cargar el script de clientes dinámicamente cuando se navega a esta sección
             import('./src/templates/clientes/clientesBody.js').then((module) => {
-                const { getClientes, showAddClientForm, addClient, deleteClient } = module;
+                const { getClientes, getTipoDoc, getBarrios, showAddClientForm, addClient, deleteClient } = module;
 
                 // Asignar funciones al ámbito global
                 window.showAddClientForm = showAddClientForm;
@@ -24,6 +24,8 @@ function navigate(page) {
                 window.deleteClient = deleteClient;
                 loadScriptDrop(content, 'clientes', page);
                 getClientes();
+                getBarrios();
+                getTipoDoc();
             }).catch((error) => {
                 console.error('Error al cargar el módulo de clientes:', error);
             });

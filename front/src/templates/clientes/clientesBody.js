@@ -4,33 +4,15 @@ export function showAddClientForm() {
 
 export function addClient(event) {
     event.preventDefault();
-    const clientTableBody = document.getElementById('clientTableBody');
-
-    const name = document.getElementById('clientName').value;
-    const lastName = document.getElementById('clientLastName').value;
-    const address = document.getElementById('clientAddress').value;
-    const clientRazonSoc = document.getElementById('clientRazonSoc').value;
-    const barrio = document.getElementById('clientBarrio').value;
-
-    const newRow = document.createElement('li');
-    newRow.classList.add('table-row');
-
-    newRow.innerHTML = `
-        <div class="col col-1" data-label="Numero Cuenta">${Math.floor(Math.random() * 1000)}</div>
-        <div class="col col-2" data-label="Nombre">${name}</div>
-        <div class="col col-3" data-label="Apellido">${lastName}</div>
-        <div class="col col-4" data-label="Razón Social">${clientRazonSoc}</div>
-        <div class="col col-5" data-label="Barrio">${barrio}</div>
-        <div class="col col-6" data-label="Direccion">${address}</div>
-        <a href="" class="col col-7 botoncito">Ver</a>
-    `;
-
-
-
-    clientTableBody.appendChild(newRow);
-
-    document.getElementById('addClientForm').classList.add('d-none');
-    event.target.reset();
+    //nombre, apellido, direccion, dni, telefino, barrio, tipodoc
+    const Nombre = document.getElementById('nombreCliente').value;
+    const Apellido = document.getElementById('apellidoCliente').value;
+    const Direccion = document.getElementById('direccionCliente').value;
+    const Telefono = document.getElementById('telefonoCliente').value;
+    const IdBarrio = document.getElementById('IdBarrio').value;
+    const IdTipoDoc = document.getElementById('IdTipoDoc').value;
+    const DNI = document.getElementById('clientBarrio').value;
+   
 }
 
 export function deleteClient(button) {
@@ -39,26 +21,43 @@ export function deleteClient(button) {
 }
 
 
-// document.addEventListener('DOMContentLoaded', function() {
-//   setTimeout(() => {
-//       getClientes(); 
-//   }, 500);  // Retrasar la llamada 500ms
-// });
-
-
-
+export async function getBarrios() {
+    try {
+        const response = await fetch('http://localhost:4000/utils/barrios'); 
+        if (!response.ok) {
+            throw new Error('Error al obtener los barrios');  
+        }
+        const datos = await response.json();  // Parsear la respuesta como JSON
+        console.log(datos);  // Ver los datos en la consola
+        cargarCombo(datos,'IdBarrio');  // Llamar a la función para mostrar los clientes en la tabla
+    } catch (error) {
+        console.error('Error al obtener los clientes:', error);  // Mostrar el error en la consola
+    }
+}
+export async function getTipoDoc() {
+    try {
+        const response = await fetch('http://localhost:4000/utils/tipodoc'); 
+        if (!response.ok) {
+            throw new Error('Error al obtener los tipos de documentos');  
+        }
+        const datos = await response.json();
+        console.log(datos);  
+        cargarCombo(datos,'IdTipoDoc');  
+    } catch (error) {
+        console.error('Error al obtener los tipos de documento:', error); 
+    }
+  }
 
 export async function getClientes() {
   try {
-      const response = await fetch('http://localhost:4000/clientes/get');  // Hacer la solicitud al backend
+      const response = await fetch('http://localhost:4000/clientes/get'); 
       if (!response.ok) {
-          throw new Error('Error al obtener los clientes');  // Manejar errores de respuesta
+          throw new Error('Error al obtener los clientes'); 
       }
-      const datos = await response.json();  // Parsear la respuesta como JSON
-      console.log(datos);  // Ver los datos en la consola
-      cargarClientes(datos);  // Llamar a la función para mostrar los clientes en la tabla
+      const datos = await response.json();  
+      cargarClientes(datos); 
   } catch (error) {
-      console.error('Error al obtener los clientes:', error);  // Mostrar el error en la consola
+      console.error('Error al obtener los clientes:', error);  
   }
 }
 
@@ -82,3 +81,15 @@ function cargarClientes(datos) {
     });
 }
 
+function cargarCombo(datos, idElemento){
+    //<option value="apple">Apple</option>
+    const comboSelect = document.getElementById(idElemento);
+    datos.forEach(data => {
+        const newOption = document.createElement('option');
+        newOption.value = data.id; 
+        newOption.textContent = data.Nombre;
+        comboSelect.appendChild(newOption);
+    });
+}
+
+//idTipoDocumento

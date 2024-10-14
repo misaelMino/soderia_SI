@@ -3,7 +3,7 @@ const morgan = require("morgan");
 const cors = require("cors");
 const clienteRoutes = require("./routes/clientesRoutes.js");
 const pedidosRoutes = require("./routes/pedidosRoutes.js");
-
+const utilsRoutes = require("./routes/utilsRoutes.js");
 
 //try/catch???
 //config inicial
@@ -24,3 +24,4 @@ app.use(express.json()); //para parsear los datos json
 
 app.use("/clientes", clienteRoutes);  // Cargar las rutas de clientes bajo la ruta base "/clientes"
 app.use("/pedidos", pedidosRoutes);
+app.use("/utils" , utilsRoutes);
