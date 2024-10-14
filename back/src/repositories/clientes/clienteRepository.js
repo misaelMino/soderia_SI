@@ -13,7 +13,7 @@ const addCliente = async (data) =>{
     const addCliente = await connection.query(
         `INSERT INTO cliente (Nombre, Apellido, Direccion, DNI, Telefono, FechaDeAlta, IdBarrio, IdTipoDoc) 
          VALUES (?, ?, ?, ?, ?, CURDATE(), ?, ?);`,
-        [data.nombre, data.apellido, data.direccion, data.DNI, data.telefono, data.idbarrio, data.idtipodoc]
+        [data.Nombre, data.Apellido, data.Direccion, data.DNI, data.Telefono, data.IdBarrio, data.IdTipoDoc]
       );      
 }
 

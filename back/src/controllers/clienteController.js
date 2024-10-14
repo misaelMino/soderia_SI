@@ -19,14 +19,24 @@ const getClientes = async (req, res) => {
 };
 
 const addCliente = async (req, res) => {
-    const data = req.body; 
-    try {
-      await ClienteRepository.addCliente(data);  //Si no me equivoco tanto aca como en el update deberia crear un objeto de tipo Cliente, tal como se encuentra hoecho en getClientes()
+  const data = req.body;
+  if (!data.Nombre || !data.Apellido || !data.Direccion || !data.DNI || !data.Telefono || !data.IdBarrio || !data.IdTipoDoc) {
+      return res.status(400).json({ message: 'Faltan datos requeridos' });
+  }
+  data.DNI = parseInt(data.DNI);
+  data.IdBarrio = parseInt(data.IdBarrio);
+  data.IdTipoDoc = parseInt(data.IdTipoDoc);
+  if (isNaN(data.DNI) || isNaN(data.IdBarrio) || isNaN(data.IdTipoDoc)) {
+      return res.status(400).json({ message: 'Los campos DNI, IdBarrio y IdTipoDoc deben ser números válidos' });
+  }
+  try {
+      await ClienteRepository.addCliente(data);
       res.status(201).json({ message: 'Cliente agregado correctamente' });
-    } catch (error) {
-      res.status(500).json({ message: 'Error al cargar cliente' });
-    }
-  };
+  } catch (error) {
+      res.status(500).json({ message: 'Error al cargar cliente', error: error.message });
+  }
+};
+
   
 const updateCliente = async (req, res) => {
   const data = req.body;
@@ -42,10 +52,6 @@ const updateCliente = async (req, res) => {
     res.status(500).json({ message: 'Error al cargar los nuevos datos del cliente' });
   }
 };
-
-
-
-
 
 
 module.exports = {

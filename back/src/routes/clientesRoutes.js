@@ -6,6 +6,7 @@ router.get('/get', clienteController.getClientes);
 //este me ense;o GPT
 router.post('/add', (req, res) => {
     const data = req.body; 
+    debugger;
     clienteController.addCliente(req, res); 
 });
 

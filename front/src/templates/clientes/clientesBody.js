@@ -5,14 +5,41 @@ export function showAddClientForm() {
 export function addClient(event) {
     event.preventDefault();
     //nombre, apellido, direccion, dni, telefino, barrio, tipodoc
-    const Nombre = document.getElementById('nombreCliente').value;
-    const Apellido = document.getElementById('apellidoCliente').value;
-    const Direccion = document.getElementById('direccionCliente').value;
-    const Telefono = document.getElementById('telefonoCliente').value;
-    const IdBarrio = document.getElementById('IdBarrio').value;
-    const IdTipoDoc = document.getElementById('IdTipoDoc').value;
-    const DNI = document.getElementById('clientBarrio').value;
-   
+    //[data.nombre, data.apellido, data.direccion, data.DNI, data.telefono, data.idbarrio, data.idtipodoc]
+    const data = {
+        Nombre: document.getElementById('nombreCliente').value,
+        Apellido: document.getElementById('apellidoCliente').value,
+        Direccion: document.getElementById('direccionCliente').value,
+        DNI: document.getElementById('DNICliente').value,
+        Telefono: document.getElementById('telefonoCliente').value,
+        IdBarrio: document.getElementById('IdBarrio').value,
+        IdTipoDoc: document.getElementById('IdTipoDoc').value
+    }
+    console.log(data);
+    try {
+        fetch('http://localhost:4000/clientes/add', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json', // Especifica que los datos se envían en formato JSON
+            },
+            body: JSON.stringify(data) // Convierte los datos a JSON para enviarlos
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Error en la solicitud: ' + response.statusText);
+                }
+                return response.json(); // Convertir la respuesta a JSON
+            })
+            .then(data => {
+                console.log('Cliente agregado con éxito:', data); // Maneja la respuesta exitosa del servidor
+            })
+            .catch(error => {
+                console.error('Error al agregar cliente:', error); // Maneja los errores
+            });
+    } catch (error) {
+        console.error('Error al obtener los clientes:', error);  // Mostrar el error en la consola
+    }
+    event.target.reset();
 }
 
 export function deleteClient(button) {
@@ -29,7 +56,7 @@ export async function getBarrios() {
         }
         const datos = await response.json();  // Parsear la respuesta como JSON
         console.log(datos);  // Ver los datos en la consola
-        cargarCombo(datos,'IdBarrio');  // Llamar a la función para mostrar los clientes en la tabla
+        cargarCombo(datos,'IdBarrio','IdBarrio','Nombre');  // Llamar a la función para mostrar los clientes en la tabla
     } catch (error) {
         console.error('Error al obtener los clientes:', error);  // Mostrar el error en la consola
     }
@@ -42,7 +69,7 @@ export async function getTipoDoc() {
         }
         const datos = await response.json();
         console.log(datos);  
-        cargarCombo(datos,'IdTipoDoc');  
+        cargarCombo(datos,'IdTipoDoc','IdTipoDoc','Nombre');  
     } catch (error) {
         console.error('Error al obtener los tipos de documento:', error); 
     }
@@ -81,13 +108,12 @@ function cargarClientes(datos) {
     });
 }
 
-function cargarCombo(datos, idElemento){
-    //<option value="apple">Apple</option>
+function cargarCombo(datos, idElemento, campoId, campoNombre) {
     const comboSelect = document.getElementById(idElemento);
     datos.forEach(data => {
         const newOption = document.createElement('option');
-        newOption.value = data.id; 
-        newOption.textContent = data.Nombre;
+        newOption.value = data[campoId];  
+        newOption.textContent = data[campoNombre];
         comboSelect.appendChild(newOption);
     });
 }
