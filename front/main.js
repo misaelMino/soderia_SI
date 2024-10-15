@@ -25,8 +25,8 @@ function navigate(page) {
                 window.getClienteById = getClienteById;
                 loadScriptDrop(content, 'clientes', page);
                 getClientes();
-                getBarrios();
-                getTipoDoc();
+                getBarrios("");
+                getTipoDoc("");
                 loadScriptDrop(content, 'clientes', page, clientesPedidosModal);
             }).catch((error) => {
                 console.error('Error al cargar el módulo de clientes:', error);

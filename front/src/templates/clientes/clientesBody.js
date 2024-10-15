@@ -69,7 +69,11 @@ export async function getClienteById(IdCliente) {
 
 
 
-export async function getBarrios() {
+export async function getBarrios(tipo) {
+    
+    if (tipo === 1) {
+        tipo = "mod"
+    }
     try {
         const response = await fetch('http://localhost:4000/utils/barrios'); 
         if (!response.ok) {
@@ -77,12 +81,16 @@ export async function getBarrios() {
         }
         const datos = await response.json();  // Parsear la respuesta como JSON
         console.log(datos);  // Ver los datos en la consola
-        cargarCombo(datos,'IdBarrio','IdBarrio','Nombre');  // Llamar a la función para mostrar los clientes en la tabla
+        cargarCombo(datos,`${tipo}IdBarrio`,'IdBarrio','Nombre');  // Llamar a la función para mostrar los clientes en la tabla
     } catch (error) {
         console.error('Error al obtener los clientes:', error);  // Mostrar el error en la consola
     }
 }
-export async function getTipoDoc() {
+export async function getTipoDoc(tipo) {
+   
+    if (tipo === 1) {
+        tipo = "mod"
+    }
     try {
         const response = await fetch('http://localhost:4000/utils/tipodoc'); 
         if (!response.ok) {
@@ -90,7 +98,7 @@ export async function getTipoDoc() {
         }
         const datos = await response.json();
         console.log(datos);  
-        cargarCombo(datos,'IdTipoDoc','IdTipoDoc','Nombre');  
+        cargarCombo(datos,`${tipo}IdTipoDoc`,'IdTipoDoc','Nombre');  
     } catch (error) {
         console.error('Error al obtener los tipos de documento:', error); 
     }
@@ -141,8 +149,8 @@ function cargarModalCliente(data) {
     //const clientTableBody = document.getElementById('clientTableBody');
     //cargarCombo(datos,'IdBarrio','IdBarrio','Nombre');
     //cargarCombo(datos,'IdTipoDoc','IdTipoDoc','Nombre');  
-    getBarrios();
-    getTipoDoc();
+    getBarrios(1);
+    getTipoDoc(1);
 
 
     let Nombre = document.getElementById('modNombreCliente');
@@ -150,8 +158,8 @@ function cargarModalCliente(data) {
     let Direccion = document.getElementById('modDireccionCliente');
     let DNI = document.getElementById('modDNICliente');
     let Telefono = document.getElementById('modTelefonoCliente');
-    let IdBarrio = document.getElementById('IdBarrio');
-    let IdTipoDoc = document.getElementById('IdTipoDoc');
+    let IdBarrio = document.getElementById('modIdBarrio');
+    let IdTipoDoc = document.getElementById('modIdTipoDoc');
     
     Nombre.value = data[0].Nombre;
     Apellido.value = data[0].Apellido;
