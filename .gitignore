@@ -1,3 +1,8 @@
+<<<<<<< HEAD
 node_modules/
 .env
 .vscode/
+=======
+node_modules/
+.env
+>>>>>>> 74388b837df74f975ccb59af6d24c4a710260b9f
