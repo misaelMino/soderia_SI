@@ -32,6 +32,21 @@ const getClienteById = async (req, res) => {
     }
 };
 
+const getClienteParametrizado = async (req, res) => {
+    const data = req.body;
+    const IdCliente = req.params.id
+    data.IdCliente = IdCliente;
+    console.log(data.IdCliente + " este es el ID");
+    try {
+        const clientesData = await ClienteRepository.getClienteParametrizado(null ,data.Nombre, null, null); // datos JSON desde la base de datos
+        res.json(clientesData);
+        console.log(clientesData);
+    } catch (error) {
+        res.status(500).json({ message: 'Error al obtener cliente, parametros erróneos' });
+    }
+};
+
+
 
 // /getClientById
 const addCliente = async (req, res) => {
@@ -74,6 +89,7 @@ module.exports = {
     addCliente,
     getClientes,
     updateCliente,
-    getClienteById
+    getClienteById,
+    getClienteParametrizado
 };
 

@@ -20,6 +20,52 @@ const getClienteById = async (IdCliente) => {
 };
 
 
+const getClienteParametrizado = async ({ IdCliente, Nombre, Apellido, NombreBarrio }) => {
+    const connection = await database.getConnection();
+    console.log(IdCliente + " ACA DESDE EL REPOSITORY");
+  
+    let query = `
+      SELECT c.IdCliente, c.Nombre, c.Apellido, c.Direccion, c.DNI, c.IdTipoDoc, c.Telefono, c.FechaDeAlta, 
+             b.Nombre as NombreBarrio, b.IdBarrio
+      FROM cliente AS c  
+      JOIN barrio AS b ON c.IdBarrio = b.IdBarrio
+      WHERE 1=1
+    `;
+  
+    const params = [];
+  
+    if (IdCliente) {
+      query += ` AND c.IdCliente = ?`;
+      params.push(IdCliente);
+    }
+  
+    if (Nombre) {
+      query += ` AND c.Nombre LIKE ?`;
+      params.push(`%${Nombre}%`);
+    }
+  
+    if (Apellido) {
+      query += ` AND c.Apellido LIKE ?`;
+      params.push(`%${Apellido}%`);
+    }
+  
+    if (NombreBarrio) {
+      query += ` AND b.Nombre LIKE ?`;
+      params.push(`%${NombreBarrio}%`);
+    }
+  
+    const [result] = await connection.query(query, params);
+    return result;
+  };
+  
+
+
+
+
+
+
+
+
 
 const addCliente = async (data) =>{
     const connection = await database.getConnection();
@@ -49,6 +95,7 @@ module.exports = {
     getAllClientes,
     addCliente,
     updateCliente,
-    getClienteById 
+    getClienteById,
+    getClienteParametrizado
 };
 
