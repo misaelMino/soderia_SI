@@ -1,6 +1,6 @@
 document.getElementById('generarPedidoBtn').addEventListener('click', function() {
     // Aquí iría la lógica para guardar el pedido
-    alert('Pedido generado');
+    alert('Cliente modificado');
   });
   
   function agregarFilaPedido() {

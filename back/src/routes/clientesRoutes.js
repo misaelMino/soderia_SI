@@ -3,7 +3,9 @@ const router = express.Router();
 const clienteController = require('../controllers/clienteController'); 
 
 router.get('/get', clienteController.getClientes);  
-//este me ense;o GPT
+
+router.get('/get/:id', clienteController.getClienteById);
+
 router.post('/add', (req, res) => {
     const data = req.body; 
     debugger;

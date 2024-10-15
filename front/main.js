@@ -26,9 +26,11 @@ function navigate(page) {
                 getClientes();
                 getBarrios();
                 getTipoDoc();
+                loadScriptDrop(content, 'clientes', page, clientesPedidosModal);
             }).catch((error) => {
                 console.error('Error al cargar el módulo de clientes:', error);
             });
+
             break;
         case 'clientesPedidos':
             loadScriptDrop(content, 'clientes', page, clientesPedidosModal);

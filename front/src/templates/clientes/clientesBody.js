@@ -28,6 +28,7 @@ export function addClient(event) {
                 if (!response.ok) {
                     throw new Error('Error en la solicitud: ' + response.statusText);
                 }
+                getClientes();
                 return response.json(); // Convertir la respuesta a JSON
             })
             .then(data => {
@@ -36,16 +37,34 @@ export function addClient(event) {
             .catch(error => {
                 console.error('Error al agregar cliente:', error); // Maneja los errores
             });
+           
     } catch (error) {
         console.error('Error al obtener los clientes:', error);  // Mostrar el error en la consola
     }
     event.target.reset();
+    
 }
 
 export function deleteClient(button) {
     const row = button.parentElement.parentElement;
     row.remove();
 }
+
+
+export async function getClienteById(IdCliente) {
+    try {
+        const response = await fetch(`http://localhost:4000/clientes/get/${IdCliente}`); 
+        if (!response.ok) {
+            throw new Error('Error al obtener los barrios');  
+        }
+        const datos = await response.json();  // Parsear la respuesta como JSON
+        console.log(datos);  // Ver los datos en la consola
+        cargarCombo(datos,'IdBarrio','IdBarrio','Nombre');  // Llamar a la función para mostrar los clientes en la tabla
+    } catch (error) {
+        console.error('Error al obtener los clientes:', error);  // Mostrar el error en la consola
+    }
+}
+
 
 
 export async function getBarrios() {
@@ -91,6 +110,7 @@ export async function getClientes() {
 function cargarClientes(datos) {
     //nombre, appelido, cuenta, barrio, direccion
     const clientTableBody = document.getElementById('clientTableBody');
+    clientTableBody.innerHTML = '';
     datos.forEach(data => {
         const newRow = document.createElement('li');
         newRow.classList.add('table-row');
@@ -98,7 +118,7 @@ function cargarClientes(datos) {
         <div class="col col-1 text-start" data-label="Nombre">${data.Nombre}</div>
         <div class="col col-2 text-start" data-label="Apellido">${data.Apellido}</div>
         <div class="col col-3 text-start" data-label="Cuenta">${data.IdCliente}</div>
-        <div class="col col-4 text-start" data-label="Barrio">${data.IdBarrio}</div>
+        <div class="col col-4 text-start" data-label="Barrio">${data.NombreBarrio}</div>
         <div class="col col-5 text-start" data-label="Direccion">${data.Direccion}</div>
         <div class="col col-6 text-center" data-label="Cuenta corriente"><a href="" class="col col-5 botoncito">Ver</a></div>
         <div class="col col-7 text-center" data-label="Estado">-</div>

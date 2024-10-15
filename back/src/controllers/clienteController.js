@@ -6,18 +6,34 @@ const getClientes = async (req, res) => {
         const clientesData = await ClienteRepository.getAllClientes(); // datos JSON desde la base de datos
 
         // convertimos los datos a instancias de la clase Cliente
-        const clientes = clientesData.map(data => {
-            return new Cliente(data.IdCliente, data.Nombre, data.Apellido, data.Direccion, data.IdTipoDoc,
-                 data.DNI, data.Telefono, data.FechaDeAlta, data.IdBarrio);
-        });
+        // const clientes = clientesData.map(data => {
+        //     return new Cliente(data.IdCliente, data.Nombre, data.Apellido, data.Direccion, data.IdTipoDoc,
+        //          data.DNI, data.Telefono, data.FechaDeAlta, data.IdBarrio);
+        // });
 
 
-        res.json(clientes);  // devolvemos los clientes como JSON
+        res.json(clientesData);  // devolvemos los clientes como JSON
     } catch (error) {
         res.status(500).json({ message: 'Error al obtener clientes' });
     }
 };
 
+const getClienteById = async (req, res) => {
+    const data = req.body;
+    const IdCliente = req.params.id
+    data.IdCliente = IdCliente;
+    console.log(data.IdCliente + " este es el ID");
+    try {
+        const clientesData = await ClienteRepository.getClienteById(data.IdCliente); // datos JSON desde la base de datos
+        res.json(clientesData);
+        console.log(clientesData);
+    } catch (error) {
+        res.status(500).json({ message: 'Error al obtener cliente, ID inexistente' });
+    }
+};
+
+
+// /getClientById
 const addCliente = async (req, res) => {
   const data = req.body;
   if (!data.Nombre || !data.Apellido || !data.Direccion || !data.DNI || !data.Telefono || !data.IdBarrio || !data.IdTipoDoc) {
@@ -57,6 +73,7 @@ const updateCliente = async (req, res) => {
 module.exports = {
     addCliente,
     getClientes,
-    updateCliente
+    updateCliente,
+    getClienteById
 };
 
