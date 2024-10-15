@@ -1,3 +1,7 @@
+//import clientesPedidosModal
+import { clientesPedidosModal } from './clientesPedido';
+//front\src\templates\clientes\clientesPedido.js
+
 export function showAddClientForm() {
     document.getElementById('addClientForm').classList.toggle('d-none');
 }
@@ -59,7 +63,8 @@ export async function getClienteById(IdCliente) {
         }
         const datos = await response.json();  // Parsear la respuesta como JSON
         console.log(datos);  // Ver los datos en la consola
-        cargarCombo(datos,'IdBarrio','IdBarrio','Nombre');  // Llamar a la función para mostrar los clientes en la tabla
+        
+        cargarModalCliente(datos);  // Llamar a la función para mostrar los clientes en la tabla
     } catch (error) {
         console.error('Error al obtener los clientes:', error);  // Mostrar el error en la consola
     }
@@ -121,11 +126,48 @@ function cargarClientes(datos) {
         <div class="col col-4 text-start" data-label="Barrio">${data.NombreBarrio}</div>
         <div class="col col-5 text-start" data-label="Direccion">${data.Direccion}</div>
         <div class="col col-6 text-center" data-label="Cuenta corriente"><a href="" class="col col-5 botoncito">Ver</a></div>
-        <div class="col col-7 text-center" data-label="Estado">-</div>
+        <button type="button" class="btn generar-btn mt-4" data-modal-ref="Generar">Modificar</button>
     `;
         clientTableBody.appendChild(newRow);
-        document.getElementById('addClientForm').classList.add('d-none');
+        
     });
+    const modificarButton = newRow.querySelector('.generar-btn');
+    modificarButton.addEventListener('click', function() {
+        clientesPedidosModal();
+        
+    });
+
+
+
+}
+
+function cargarModalCliente(data) {
+    //nombre, appelido, cuenta, barrio, direccion
+    //const clientTableBody = document.getElementById('clientTableBody');
+    //cargarCombo(datos,'IdBarrio','IdBarrio','Nombre');
+    //cargarCombo(datos,'IdTipoDoc','IdTipoDoc','Nombre');  
+    getBarrios();
+    getTipoDoc();
+
+
+    let Nombre = document.getElementById('modNombreCliente');
+    let Apellido = document.getElementById('modApellidoCliente');
+    let Direccion = document.getElementById('modDireccionCliente');
+    let DNI = document.getElementById('DNICliente');
+    let Telefono = document.getElementById('modTelefonoCliente');
+    let IdBarrio = document.getElementById('IdBarrio');
+    let IdTipoDoc = document.getElementById('IdTipoDoc');
+    
+    Nombre.value = data.Nombre;
+    Apellido.value = data.Apellido;
+    Direccion.value = data.Direccion;
+    DNI.value = data.DNI;
+    Telefono.value = data.Telefono;
+    IdBarrio.value = data.IdBarrio;
+    IdTipoDoc.value = data.IdTipoDoc;
+    
+    //document.getElementById('addClientForm').classList.add('d-none');
+    
 }
 
 function cargarCombo(datos, idElemento, campoId, campoNombre) {

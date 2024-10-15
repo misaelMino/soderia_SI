@@ -16,12 +16,13 @@ function navigate(page) {
         case 'clientes':
             // Cargar el script de clientes dinámicamente cuando se navega a esta sección
             import('./src/templates/clientes/clientesBody.js').then((module) => {
-                const { getClientes, getTipoDoc, getBarrios, showAddClientForm, addClient, deleteClient } = module;
+                const { getClientes, getClienteById, getTipoDoc, getBarrios, showAddClientForm, addClient, deleteClient } = module;
 
                 // Asignar funciones al ámbito global
                 window.showAddClientForm = showAddClientForm;
                 window.addClient = addClient;
                 window.deleteClient = deleteClient;
+                window.getClienteById = getClienteById;
                 loadScriptDrop(content, 'clientes', page);
                 getClientes();
                 getBarrios();
