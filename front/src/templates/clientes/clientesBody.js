@@ -1,6 +1,3 @@
-//import clientesPedidosModal
-import { clientesPedidosModal } from './clientesPedido';
-//front\src\templates\clientes\clientesPedido.js
 
 export function showAddClientForm() {
     document.getElementById('addClientForm').classList.toggle('d-none');
@@ -131,11 +128,9 @@ function cargarClientes(datos) {
         clientTableBody.appendChild(newRow);
         
     });
-    const modificarButton = newRow.querySelector('.generar-btn');
-    modificarButton.addEventListener('click', function() {
-        clientesPedidosModal();
+
         
-    });
+
 
 
 
@@ -153,18 +148,18 @@ function cargarModalCliente(data) {
     let Nombre = document.getElementById('modNombreCliente');
     let Apellido = document.getElementById('modApellidoCliente');
     let Direccion = document.getElementById('modDireccionCliente');
-    let DNI = document.getElementById('DNICliente');
+    let DNI = document.getElementById('modDNICliente');
     let Telefono = document.getElementById('modTelefonoCliente');
     let IdBarrio = document.getElementById('IdBarrio');
     let IdTipoDoc = document.getElementById('IdTipoDoc');
     
-    Nombre.value = data.Nombre;
-    Apellido.value = data.Apellido;
-    Direccion.value = data.Direccion;
-    DNI.value = data.DNI;
-    Telefono.value = data.Telefono;
-    IdBarrio.value = data.IdBarrio;
-    IdTipoDoc.value = data.IdTipoDoc;
+    Nombre.value = data[0].Nombre;
+    Apellido.value = data[0].Apellido;
+    Direccion.value = data[0].Direccion;
+    DNI.value = data[0].DNI;
+    Telefono.value = data[0].Telefono;
+    IdBarrio.value = data[0].IdBarrio;
+    IdTipoDoc.value = data[0].IdTipoDoc;
     
     //document.getElementById('addClientForm').classList.add('d-none');
     
