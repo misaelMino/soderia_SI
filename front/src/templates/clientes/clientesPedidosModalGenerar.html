@@ -9,43 +9,54 @@
         <h5 class="modal-title" id="pedidoModalLabel">Generar Pedido</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-
       <div class="modal-body">
-        <form onsubmit="">
-          <div class="mb-3">
-            <label for="nombreCliente" class="form-label">Nombre</label>
-            <input type="text" value="asdasd" class="form-control" id="modNombreCliente" required>
-          </div>
-          <div class="mb-3">
-            <label for="apellidoCliente" class="form-label">Apellido</label>
-            <input type="text" class="form-control" id="modApellidoCliente" required>
-          </div>
-          <div class="mb-3">
-            <label for="direccionCliente" class="form-label">Dirección</label>
-            <input type="text" class="form-control" id="modDireccionCliente" required>
-          </div>
-          <div class="mb-3">
-            <label for="telefonoCliente" class="form-label">Teléfono</label>
-            <input type="text" class="form-control" id="modTelefonoCliente" required>
-          </div>
-          <div class="mb-3">
-            <label for="documento">Selecciona tipo de documento:</label>
-            <select id="modIdTipoDoc" name="tipoDoc">
+        <form id="pedidoForm">
+          <!-- Selección de cliente y tipo de pedido -->
+          <div class="mb-3 ">
+            <label for="selectClient" class="form-label">Seleccionar Cliente</label>
+            <select id="selectClient" class="form-select">
+              <!-- Opciones de clientes -->
             </select>
-            <label for="modDNICliente" class="form-label">Número</label>
-            <input type="number" class="form-control" id="modDNICliente" required>
+            <input type="text" class="form-control mt-3" id="clientName" placeholder="Nombre del Cliente" readonly>
           </div>
+
           <div class="mb-3">
-            <label for="barrios">Selecciona barrio:</label>
-            <select id="modIdBarrio" name="Barrio">
-            </select>
+            <label class="form-label">Tipo de Pedido</label>
+            <div>
+              <input type="radio" id="tipoUnico" name="tipoPedido" value="Unico">
+              <label for="tipoUnico">Único</label>
+              <input type="radio" id="tipoSemanal" name="tipoPedido" value="Semanal">
+              <label for="tipoSemanal">Semanal</label>
+              <input type="radio" id="tipoMensual" name="tipoPedido" value="Mensual">
+              <label for="tipoMensual">Mensual</label>
+            </div>
+          </div>
+
+          <!-- Tabla de Detalle de Pedido -->
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Código</th>
+                <th>Descripción</th>
+                <th>Cantidad</th>
+                <th>Precio Unitario</th>
+                <th>Subtotal</th>
+              </tr>
+            </thead>
+            <tbody id="detallePedidoBody">
+              <!-- Filas generadas dinámicamente -->
+            </tbody>
+          </table>
+
+          <!-- Total -->
+          <div class="d-flex justify-content-end">
+            <h5>Total: <span id="totalPedido">0</span></h5>
           </div>
         </form>
       </div>
-
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-        <button type="button" class="btn botoncito" id="modModificarBtn" onclick="updateCliente()">Modificar</button>
+        <button type="button" class="btn botoncito" id="generarPedidoBtn">Generar</button>
       </div>
     </div>
   </div>

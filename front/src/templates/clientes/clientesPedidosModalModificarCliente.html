@@ -1,0 +1,52 @@
+<link rel="stylesheet" href="../../../front/src/templates/header/header-dashboard.css">
+<link rel="stylesheet" href="../../../front/src/templates/buttons/botoncitos.css">
+<link rel="stylesheet" href="../../../front/src/templates/clientes/clientesPedidosModal.css">
+
+<div class="modal fade" id="pedidoModal" tabindex="-1" aria-labelledby="pedidoModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header titulo">
+        <h5 class="modal-title" id="pedidoModalLabel">Generar Pedido</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <div class="modal-body">
+        <form onsubmit="">
+          <div class="mb-3">
+            <label for="nombreCliente" class="form-label">Nombre</label>
+            <input type="text" value="asdasd" class="form-control" id="modNombreCliente" required>
+          </div>
+          <div class="mb-3">
+            <label for="apellidoCliente" class="form-label">Apellido</label>
+            <input type="text" class="form-control" id="modApellidoCliente" required>
+          </div>
+          <div class="mb-3">
+            <label for="direccionCliente" class="form-label">Dirección</label>
+            <input type="text" class="form-control" id="modDireccionCliente" required>
+          </div>
+          <div class="mb-3">
+            <label for="telefonoCliente" class="form-label">Teléfono</label>
+            <input type="text" class="form-control" id="modTelefonoCliente" required>
+          </div>
+          <div class="mb-3">
+            <label for="documento">Selecciona tipo de documento:</label>
+            <select id="modIdTipoDoc" name="tipoDoc">
+            </select>
+            <label for="modDNICliente" class="form-label">Número</label>
+            <input type="number" class="form-control" id="modDNICliente" required>
+          </div>
+          <div class="mb-3">
+            <label for="barrios">Selecciona barrio:</label>
+            <select id="modIdBarrio" name="Barrio">
+            </select>
+          </div>
+        </form>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn botoncito" id="modModificarBtn" onclick="updateCliente()">Modificar</button>
+      </div>
+    </div>
+  </div>
+</div>
