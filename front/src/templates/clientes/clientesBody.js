@@ -46,13 +46,13 @@ export function addClient(event) {
     
 }
 
-export function updateCliente(event) {
+export function updateCliente() {
     
     //nombre, apellido, direccion, dni, telefino, barrio, tipodoc
     // SET Nombre = ?, Apellido = ?, Direccion = ?, DNI = ?, Telefono = ?, IdBarrio = ?, IdTipoDoc = ?
     //[data.nombre, data.apellido, data.direccion, data.DNI, data.telefono, data.idbarrio, data.idtipodoc]
     const data = {
-        IdCliente: modIdCliente,
+        IdCliente: IdClientee,
         Nombre: document.getElementById('modNombreCliente').value,
         Apellido: document.getElementById('modApellidoCliente').value,
         Direccion: document.getElementById('modDireccionCliente').value,
@@ -92,16 +92,16 @@ export function updateCliente(event) {
 }
 
 
+
 export function deleteClient(button) {
     const row = button.parentElement.parentElement;
     row.remove();
 }
 
-let modIdCliente;
-export async function getClienteById(IdCliente) {
-    modIdCliente=IdCliente;
+
+export async function getClienteById() {
     try {
-        const response = await fetch(`http://localhost:4000/clientes/get/${IdCliente}`); 
+        const response = await fetch(`http://localhost:4000/clientes/get/${IdClientee}`); 
         if (!response.ok) {
             throw new Error('Error al obtener los barrios');  
         }
@@ -163,6 +163,11 @@ export async function getClientes() {
       console.error('Error al obtener los clientes:', error);  
   }
 }
+let IdClientee;
+export function simularPresion(IdCliente) {
+    IdClientee=IdCliente
+    document.getElementById("prueba123").click();
+}
 
 function cargarClientes(datos) {
     //nombre, appelido, cuenta, barrio, direccion
@@ -178,7 +183,7 @@ function cargarClientes(datos) {
         <div class="col col-4 text-start" data-label="Barrio">${data.NombreBarrio}</div>
         <div class="col col-5 text-start" data-label="Direccion">${data.Direccion}</div>
         <div class="col col-6 text-center" data-label="Cuenta corriente"><a href="" class="col col-5 botoncito">Ver</a></div>
-        <button type="button" class="btn generar-btn mt-4" data-modal-ref="Generar">Modificar</button>
+        <button type="button" class="btn generar-btn mt-4" onclick="simularPresion(${data.IdCliente})">Modificar</button>
     `;
         clientTableBody.appendChild(newRow);
         

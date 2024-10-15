@@ -1,7 +1,3 @@
-document.getElementById('generarPedidoBtn').addEventListener('click', function() {
-    // Aquí iría la lógica para guardar el pedido
-    alert('Cliente modificado');
-  });
   
   function agregarFilaPedido() {
     const detallePedidoBody = document.getElementById('detallePedidoBody');
@@ -43,4 +39,5 @@ document.getElementById('generarPedidoBtn').addEventListener('click', function()
     fila.remove();
     calcularTotal();
   }
+  
   
