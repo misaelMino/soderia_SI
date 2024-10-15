@@ -1,0 +1,26 @@
+.header-tittlee {
+  
+    padding: 30px;
+    margin-bottom: 30px;
+  }
+
+  .header-fontt {
+    color: #ffffff;
+    font-size: 4em;
+    text-transform: uppercase;
+  }
+
+
+  .pruebitaheader{
+  background-color: #373193;; 
+  color: #FFFFFF; 
+  font-size: 2.5rem; 
+  font-weight: bold; 
+  text-align: center; 
+  padding: 20px; 
+  border-radius: 10px; 
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+  margin-bottom: 20px; 
+  text-transform: uppercase; 
+  letter-spacing: 5px; 
+}
