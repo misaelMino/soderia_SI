@@ -46,13 +46,60 @@ export function addClient(event) {
     
 }
 
+export function updateCliente(event) {
+    
+    //nombre, apellido, direccion, dni, telefino, barrio, tipodoc
+    // SET Nombre = ?, Apellido = ?, Direccion = ?, DNI = ?, Telefono = ?, IdBarrio = ?, IdTipoDoc = ?
+    //[data.nombre, data.apellido, data.direccion, data.DNI, data.telefono, data.idbarrio, data.idtipodoc]
+    const data = {
+        IdCliente: modIdCliente,
+        Nombre: document.getElementById('modNombreCliente').value,
+        Apellido: document.getElementById('modApellidoCliente').value,
+        Direccion: document.getElementById('modDireccionCliente').value,
+        DNI: document.getElementById('modDNICliente').value,
+        Telefono: document.getElementById('modTelefonoCliente').value,
+        IdBarrio: document.getElementById('modIdBarrio').value,
+        IdTipoDoc: document.getElementById('modIdTipoDoc').value
+    }
+    console.log(data);
+    try {
+        fetch(`http://localhost:4000/clientes/modify/${data.IdCliente}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json', // Especifica que los datos se envían en formato JSON
+            },
+            body: JSON.stringify(data) // Convierte los datos a JSON para enviarlos
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Error en la solicitud: ' + response.statusText);
+                }
+                getClientes();
+                return response.json(); // Convertir la respuesta a JSON
+            })
+            .then(data => {
+                console.log('Cliente agregado con éxito:', data); // Maneja la respuesta exitosa del servidor
+            })
+            .catch(error => {
+                console.error('Error al agregar cliente:', error); // Maneja los errores
+            });
+           
+    } catch (error) {
+        console.error('Error al obtener los clientes:', error);  // Mostrar el error en la consola
+    }
+    
+    
+}
+
+
 export function deleteClient(button) {
     const row = button.parentElement.parentElement;
     row.remove();
 }
 
-
+let modIdCliente;
 export async function getClienteById(IdCliente) {
+    modIdCliente=IdCliente;
     try {
         const response = await fetch(`http://localhost:4000/clientes/get/${IdCliente}`); 
         if (!response.ok) {
