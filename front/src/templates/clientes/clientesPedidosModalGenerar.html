@@ -13,14 +13,13 @@
         <form id="pedidoForm">
           <!-- Selección de cliente y tipo de pedido -->
           <div class="mb-3 ">
-            <label for="selectClient" class="form-label">Seleccionar Cliente</label>
+            <label for="selectClient" class="form-label">Buscar Cliente</label>
             <select id="selectClient" class="form-select">
               <!-- Opciones de clientes -->
             </select>
-            <input type="text" class="form-control mt-3" id="clientName" placeholder="Nombre del Cliente" readonly>
           </div>
 
-          <div class="mb-3">
+          <div class="row mb-3">
             <label class="form-label">Tipo de Pedido</label>
             <div>
               <input type="radio" id="tipoUnico" name="tipoPedido" value="Unico">
@@ -29,6 +28,12 @@
               <label for="tipoSemanal">Semanal</label>
               <input type="radio" id="tipoMensual" name="tipoPedido" value="Mensual">
               <label for="tipoMensual">Mensual</label>
+            </div>
+            <label class="seleccionePago">Seleccione medio de pago</label>
+            <div>
+              <select id="seleccionePago" class="form-select">
+                <!-- Opciones de clientes -->
+              </select>
             </div>
           </div>
 

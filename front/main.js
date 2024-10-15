@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', function () {
             navigate(this.getAttribute('data-nav'));
         });
     });
-    navigate('clientes');
+    navigate('clientesPedidos');
 });
 
 
