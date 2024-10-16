@@ -1,4 +1,40 @@
- 
+export async function getAllPedidos() {
+  try {
+      const response = await fetch('http://localhost:4000/pedidos/get'); 
+      if (!response.ok) {
+          throw new Error('Error al obtener los clientes'); 
+      }
+      const datos = await response.json();  
+      cargarPedidos(datos); 
+  } catch (error) {
+      console.error('Error al obtener los clientes:', error);  
+  }
+}
+let IdPedidoo;
+
+
+function cargarPedidos(datos) {
+    //nombre, appelido, cuenta, barrio, direccion
+    const clientTableBody = document.getElementById('tablaPedidosCargar');
+    clientTableBody.innerHTML = '';
+    datos.forEach(data => {
+        const newRow = document.createElement('li');
+        newRow.classList.add('table-row');
+        newRow.innerHTML = `
+        <div class="col col-1 text-start" data-label="NumeroPedido">${data.NumeroPedido}</div>
+        <div class="col col-2 text-start" data-label="Cliente">${data.Cliente}</div>
+        <div class="col col-3 text-start" data-label="Barrio">${data.Barrio}</div>
+        <div class="col col-4 text-start" data-label="Direccion">${data.Direccion}</div>
+        <div class="col col-5 text-start" data-label="FechaPedido">${data.FechaPedido}</div>
+        <div class="col col-6 text-start" data-label="EstadoPedido">${data.EstadoPedido}</div>
+        <button type="button" class="btn generar-btn mt-4 col col-7" onclick="simularPresion(${data.NumeroPedido})">Ver pedido</button>
+    `;
+        clientTableBody.appendChild(newRow);
+        
+    });
+}
+
+
  export async function getProductos() {
     try {
         const response = await fetch(`http://localhost:4000/utils/productos`); 
@@ -13,9 +49,6 @@
         console.error('Error al obtener los clientes:', error);  // Mostrar el error en la consola
     }
 }
-
-
-
 
 export async function getClientesCombo() {
   try {
@@ -59,8 +92,6 @@ function cargarComboCliente(datos, idElemento, campoId, campoNombre, campoApelli
 export async function cargoDetalleModal() {
     cargaDetallePedido(); // Aquí llamas a tu función o lógica
 }
-
-
 
 async function cargaDetallePedido() {
   const productosBaseDatos = await getProductos();
@@ -176,5 +207,72 @@ async function cargaDetallePedido() {
   }
 
 }
+
+export function addPedido() {
+  const data = {
+    Descripcion: "probando, todavia no agrego descripcion pq no lleeeeego",
+    IdMedioDePago: parseInt(document.getElementById('medioDePago').value),  // Medio de pago seleccionado
+    IdCondicionPago: 1,  //dps mejoro esto, aca es a cuantos dias el pago
+    IdEstadoPedido: 1,   //estado pedido despues veo que onda, me falta una banda
+    IdCliente: parseInt(document.getElementById('selectCliente').value)  // id cliente
+  };
+
+  const detallePedido = obtenerDetallePedido(); 
+
+  // json para el put
+  const pedidoJson = {
+    data: data,
+    detallePedido: detallePedido
+  };
+
+
+  console.log(pedidoJson);
+  try {
+    fetch('http://localhost:4000/pedidos/add', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json', 
+      },
+      body: JSON.stringify(pedidoJson) 
+    })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Error en la solicitud: ' + response.statusText);
+        }
+        getAllPedidos(); //ACA ACTUALIZO LOS PEDIDOS DE LA GRILLA
+        return response.json(); 
+      })
+      .then(data => {
+        console.log('pedido agregado con éxito:', data); 
+      })
+      .catch(error => {
+        console.error('Error al agregar cliente:', error); 
+      });
+
+  } catch (error) {
+    console.error('Errado:', error);  
+  }
+}
+
+function obtenerDetallePedido() {
+  const detallePedido = [];
+
+  const filasProductos = document.querySelectorAll('#detallePedidoBody tr');
+
+  filasProductos.forEach(fila => {
+      const idProducto = fila.querySelector('.selectProducto').value;
+      const cantidadPedido = fila.querySelector('.cantidadProducto').value; 
+
+      if (idProducto && cantidadPedido > 0) {
+          detallePedido.push({
+              idProducto: parseInt(idProducto),
+              cantidadPedido: parseInt(cantidadPedido)
+          });
+      }
+  });
+
+  return detallePedido;  // Retorna el array con el detalle del pedido
+}
+
 
   

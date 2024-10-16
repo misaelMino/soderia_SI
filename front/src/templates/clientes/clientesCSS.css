@@ -73,19 +73,19 @@ h2 {
   }
 
   .col-1 {
-    flex-basis: 15%;
+    flex-basis: 10%;
   }
 
   .col-2 {
-    flex-basis: 15%;
+    flex-basis: 20%;
   }
 
   .col-3 {
-    flex-basis: 10%;
+    flex-basis: 15%;
   }
 
   .col-4 {
-    flex-basis: 10%;
+    flex-basis: 15%;
   }
 
   .col-5 {
@@ -93,11 +93,7 @@ h2 {
   }
 
   .col-6 {
-    flex-basis: 10%;
-  }
-  
-  .col-7 {
-    flex-basis: 10%;
+    flex-basis: 20%;
   }
 
 

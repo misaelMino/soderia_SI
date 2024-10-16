@@ -1,6 +1,15 @@
 const database = require("../../config/database");
 
-
+const getAllPedidos = async () => {
+    const connection = await database.getConnection();
+    const [result] = await connection.query(`SELECT pe.IdPedido as NumeroPedido, concat(cl.Apellido, ', ', cl.Nombre) as Cliente, ba.Nombre as Barrio, cl.Direccion, pe.FechaPedido, ep.Nombre as EstadoPedido
+    FROM cliente as cl
+    JOIN pedido as pe ON cl.IdCliente = pe.IdCliente
+    JOIN barrio as ba ON cl.IdBarrio = ba.IdBarrio
+    JOIN estadopedido as ep ON pe.IdEstadoPedido=ep.IdEstadoPedido
+    ORDER BY pe.FechaPedido, EstadoPedido, Barrio;`);
+    return result;
+};
 
 const addPedido = async (data, detallePedido) => {
     const connection = await database.getConnection();
@@ -13,7 +22,7 @@ const addPedido = async (data, detallePedido) => {
         const result = await connection.query(
             `INSERT INTO Pedido (descripcion, fechapedido, idmediodepago, idcondicionpago, idestadopedido, idcliente)
             VALUES (?, curdate(), ?, ?, ?, ?);`,
-            [data.descripcion, data.idmediodepago, data.idcondicionpago, data.idestadopedido, data.idcliente]
+            [data.Descripcion, data.IdMedioDePago, data.IdCondicionPago, data.IdEstadoPedido, data.IdCliente]
         );
 
         const [prueba] = result;
@@ -44,8 +53,7 @@ const addPedido = async (data, detallePedido) => {
         throw error;
     }
 };
-//DELETE ProductosXPedidos
-//WHERE IdPedido=?;
+
 
 const updatePedido = async (detallePedido) => {
     const connection = await database.getConnection();
@@ -83,7 +91,6 @@ const updatePedido = async (detallePedido) => {
 
 const deletePedido = async (data) => {
 //baja logica del sistema, no lo muestro mais
-
 };
 
 
@@ -95,5 +102,6 @@ const deletePedido = async (data) => {
 module.exports = {
     addPedido,
     updatePedido,
-    deletePedido
+    deletePedido,
+    getAllPedidos
 }

@@ -1,85 +1,63 @@
-
 <link rel="stylesheet" href="../../../front/src/templates/header/header-dashboard.css">
 <link rel="stylesheet" href="../../../front/src/templates/buttons/botoncitos.css">
 <link rel="stylesheet" href="../../../front/src/templates/clientes/clientesPedidosModal.css">
 
-
-
-
-
-
-
-<div class="modal fade" id="pedidoModal" tabindex="-1" aria-labelledby="modificarPedidoModalLabel" aria-hidden="true">
+<div class="modal fade" id="pedidoModal" tabindex="-1" aria-labelledby="pedidoModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header titulo">
-        <h5 class="modal-title" id="modificarPedidoModalLabel">Modificar Pedido</h5>
+        <h5 class="modal-title" id="pedidoModalLabel">Generar Pedido</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form id="modificarPedidoForm">
-          <!-- Selección del Cliente Fijo -->
+        <form id="pedidoForm">
+          <!-- Selección de cliente y tipo de pedido -->
           <div class="mb-3">
-            <label for="clienteFijo" class="form-label">Cliente</label>
-            <input type="text" class="form-control" id="clienteFijo" value="Alberto Druetta" readonly>
+            <label for="selectClient" class="form-label">Buscar Cliente</label>
+            <select id="selectCliente" class="form-select">
+              <!-- Opciones de clientes -->
+            </select>
           </div>
 
-          <!-- Tipo de Pedido -->
-          <div class="mb-3">
+          <div class="row mb-3">
             <label class="form-label">Tipo de Pedido</label>
+            <label class="seleccionePago">Seleccione medio de pago</label>
             <div>
-              <input type="radio" id="modTipoUnico" name="modTipoPedido" value="Unico">
-              <label for="modTipoUnico">Único</label>
-              <input type="radio" id="modTipoSemanal" name="modTipoPedido" value="Semanal" checked>
-              <label for="modTipoSemanal">Semanal</label>
-              <input type="radio" id="modTipoMensual" name="modTipoPedido" value="Mensual">
-              <label for="modTipoMensual">Mensual</label>
+              <select id="medioDePago" class="form-select">
+                <!-- Opciones de medio de pago -->
+              </select>
             </div>
           </div>
 
-          <!-- Tabla de Detalle de Pedido -->
-          <div>
-            <p class="text-center text-muted">Doble clic en el ítem para modificar</p>
-            <table class="table">
-              <thead>
-                <tr>
-                  <th>Código</th>
-                  <th>Descripción</th>
-                  <th>Cantidad</th>
-                  <th>Precio Unitario</th>
-                  <th>Subtotal</th>
-               
-                </tr>
-              </thead>
-              <tbody id="modDetallePedidoBody">
-                <!-- Ejemplos de ítems cargados dinámicamente -->
-                <tr ondblclick="habilitarEdicion(this)">
-                  <td><input type="text" class="form-control" value="SODA_1L" readonly></td>
-                  <td><input type="text" class="form-control" value="Sifón soda" readonly></td>
-                  <td><input type="number" class="form-control" value="2" readonly></td>
-                  <td><input type="number" class="form-control" value="200" readonly></td>
-                  <td class="subtotal">400</td>
-                  <td><button type="button" class="btn btn-danger" onclick="eliminarFila(this)">Eliminar</button></td>
-                </tr>                
-              </tbody>
-            </table>
-          </div>
+          <!-- Tabla de productos -->
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Producto</th>
+                <th>Descripción</th>
+                <th>Precio Unitario</th>
+                <th>Cantidad</th>
+                <th>Subtotal</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="detallePedidoBody">
+              <!-- Filas dinámicas de productos se añadirán aquí -->
+            </tbody>
+          </table>
+
+          <button type="button" id="agregarProductoBtn" class="btn btn-primary">Agregar Producto</button>
 
           <!-- Total -->
           <div class="d-flex justify-content-end">
-            <h5>Total: <span id="modTotalPedido">1600</span></h5>
+            <h5>Total: $<span id="totalPedido">0</span></h5>
           </div>
         </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-        <button type="button" class="btn botoncito" id="guardarPedidoBtn">Guardar Pedido</button>
+        <button type="button" class="btn botoncito" id="generarPedidoBtn" data-bs-dismiss="modal" onclick="addPedido()">Generar</button>
       </div>
     </div>
   </div>
 </div>
-
-
-
-
-<script src="../../../src/templates/clientes/clientesPedidosFunciones.js"></script>

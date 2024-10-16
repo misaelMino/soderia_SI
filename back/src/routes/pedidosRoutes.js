@@ -12,5 +12,8 @@ router.put('/update/:id', (req, res) => {
     pedidoController.updatePedido(req, res);
 });
 
+router.get('/get', (req, res) => {
+    pedidoController.getAllPedidos(req, res); 
+});
 
 module.exports = router;
