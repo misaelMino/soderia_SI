@@ -2,29 +2,28 @@
 <link rel="stylesheet" href="../../../front/src/templates/buttons/botoncitos.css">
 <link rel="stylesheet" href="../../../front/src/templates/clientes/clientesPedidosModal.css">
 
-<div class="modal fade" id="pedidoModal" tabindex="-1" aria-labelledby="pedidoModalLabel" aria-hidden="true">
+<div class="modal fade" id="ModificarPedido" tabindex="-1" aria-labelledby="ModificarPedido" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header titulo">
-        <h5 class="modal-title" id="pedidoModalLabel">Generar Pedido</h5>
+        <h5 class="modal-title" id="pedidoModalLabel">Pedido</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <form id="pedidoForm">
           <!-- Selección de cliente y tipo de pedido -->
           <div class="mb-3">
-            <label for="selectClient" class="form-label">Buscar Cliente</label>
+            <label for="selectClient" class="form-label">Cliente</label>
             <select id="selectCliente" class="form-select">
-              <!-- Opciones de clientes -->
+              <option id="modificarModCliente" disabled selected></option>
             </select>
           </div>
 
           <div class="row mb-3">
-            <label class="form-label">Tipo de Pedido</label>
             <label class="seleccionePago">Seleccione medio de pago</label>
             <div>
-              <select id="medioDePago" class="form-select">
-                <!-- Opciones de medio de pago -->
+              <select id="modificarMedd" class="form-select">
+                <option id="modificarMedioDePago" disabled selected></option>
               </select>
             </div>
           </div>
@@ -56,7 +55,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-        <button type="button" class="btn botoncito" id="generarPedidoBtn" data-bs-dismiss="modal" onclick="addPedido()">Generar</button>
+        <button type="button" class="btn botoncito" id="generarPedidoBtn" data-bs-dismiss="modal" onclick="">Generar</button>
       </div>
     </div>
   </div>

@@ -46,7 +46,7 @@ function cargarModalPedido(data) {
   //let IdTipoDoc = document.getElementById('modIdTipoDoc');
   
   Cliente.textContent = ClienteInfo.Cliente;
-  MedioDePago.value = ClienteInfo.MedioDePago;
+  MedioDePago.textContent = ClienteInfo.MedioDePago;
   //Direccion.value = data[0].Direccion;
   //DNI.value = data[0].DNI;
   //Telefono.value = data[0].Telefono;

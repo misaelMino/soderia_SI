@@ -33,6 +33,7 @@ function navigate(page) {
                 getBarrios("");
                 getTipoDoc("");
                 loadScriptDrop(content, 'clientes', page, clientesPedidosModal);
+                
             }).catch((error) => {
                 console.error('Error al cargar el módulo de clientes:', error);
             });
@@ -50,9 +51,6 @@ function navigate(page) {
                     window.simularPresion2 = simularPresion2;
                     window.getPedidoById = getPedidoById;
                     getAllPedidos();
-                    loadScriptDrop(content, 'clientes', page);
-
-
                     loadScriptDrop(content, 'clientes', page, clientesPedidosModal);
                 }).catch((error) => {
                     console.error('Error al cargar el módulo de clientes:', error);
@@ -92,7 +90,7 @@ document.addEventListener('DOMContentLoaded', function () {
 window.showAddProvForm = showAddProvForm;
 window.addProv = addProv;
 window.deleteProv = deleteProv;
-window.clientesPedidosModal = clientesPedidosModal;
+
 window.cargarProductos = cargarProductos;
 window.cargarCombo = cargarCombo;
 

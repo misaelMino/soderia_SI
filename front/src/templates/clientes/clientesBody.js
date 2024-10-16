@@ -179,8 +179,8 @@ function cargarClientes(datos) {
         <div class="col col-3 text-start" data-label="Cuenta">${data.IdCliente}</div>
         <div class="col col-4 text-start" data-label="Barrio">${data.NombreBarrio}</div>
         <div class="col col-5 text-start" data-label="Direccion">${data.Direccion}</div>
-        <div class="col col-6 text-center" data-label="Cuenta corriente"><a href="" class="col col-5 botoncito">Ver</a></div>
-        <button type="button" class="btn generar-btn mt-4" onclick="simularPresion(${data.IdCliente})">Modificar</button>
+        <div class="col col-5 text-center"> <button type="button" class="btn generar-btn mt-4" onclick="simularPresion(${data.IdCliente})">Modificar</button></div>
+       
     `;
         clientTableBody.appendChild(newRow);
         

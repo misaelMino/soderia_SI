@@ -1,3 +1,4 @@
+
 export function clientesPedidosModal() {
     document.querySelectorAll('[data-modal-ref]').forEach(button => {
         button.addEventListener('click', async function () {
@@ -12,7 +13,7 @@ export function clientesPedidosModal() {
                 document.body.insertAdjacentHTML('beforeend', html);
 
                 // Espera a que el DOM inserte el modal y luego inicializa Bootstrap modal
-                const modalElement = document.getElementById('pedidoModal');
+                const modalElement = document.getElementById(`${ref}`);
                 const modal = new bootstrap.Modal(modalElement);
                 
                 // Mostrar el modal solo después de que esté completamente cargado
@@ -25,5 +26,4 @@ export function clientesPedidosModal() {
         });
     });   
 }
-
 
