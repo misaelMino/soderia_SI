@@ -9,7 +9,6 @@ import { loadScript } from './src/loadScript.js';
 
 
 
-
 function navigate(page) {
     let content = document.getElementById('content');
 
@@ -41,20 +40,13 @@ function navigate(page) {
             break;
         case 'clientesPedidos':
                 import('./src/templates/clientes/clientesPedidosFunciones.js').then((module) => {
-                    const { habilitarEdicion, guardarPedido, eliminarFila, calcularTotal, getClientesCombo, getMedioPago,
-                         calcularSubtotal, agregarFilaPedido, getProductos} = module;
+                    const { getClientesCombo, getMedioPago, getProductos} = module;
     
                     // Asignar funciones al ámbito global
-                    window.agregarFilaPedido = agregarFilaPedido;
-                    window.calcularSubtotal = calcularSubtotal;
-                    window.calcularTotal = calcularTotal;
-                    window.eliminarFila = eliminarFila;
-                    window.habilitarEdicion = habilitarEdicion;
-                    window.guardarPedido = guardarPedido;
                     window.getProductos = getProductos;
                     window.getClientesCombo = getClientesCombo;
                     window.getMedioPago = getMedioPago;
-
+                  
 
                     loadScriptDrop(content, 'clientes', page);
 
@@ -101,4 +93,5 @@ window.deleteProv = deleteProv;
 window.clientesPedidosModal = clientesPedidosModal;
 window.cargarProductos = cargarProductos;
 window.cargarCombo = cargarCombo;
+
 
