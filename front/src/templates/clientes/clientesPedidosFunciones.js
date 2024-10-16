@@ -12,6 +12,26 @@ export async function getAllPedidos() {
 }
 let IdPedidoo;
 
+export async function getPedidoById() {
+  try {
+      const response = await fetch(`http://localhost:4000/pedidos/get/${IdPedidoo}`); 
+      if (!response.ok) {
+          throw new Error('Error al obtener los barrios');  
+      }
+      const datos = await response.json();  // Parsear la respuesta como JSON
+      console.log(datos);  // Ver los datos en la consola
+      
+      cargarModalCliente(datos);  // Llamar a la función para mostrar los clientes en la tabla
+  } catch (error) {
+      console.error('Error al obtener los clientes:', error);  // Mostrar el error en la consola
+  }
+}
+
+
+export function simularPresion2(IdPedido) {
+  IdPedidoo = IdPedido
+  document.getElementById("prueba1234").click();
+}
 
 function cargarPedidos(datos) {
     //nombre, appelido, cuenta, barrio, direccion
@@ -26,14 +46,15 @@ function cargarPedidos(datos) {
         <div class="col col-3 text-start" data-label="Barrio">${data.Barrio}</div>
         <div class="col col-4 text-start" data-label="Direccion">${data.Direccion}</div>
         <div class="col col-5 text-start" data-label="FechaPedido">${data.FechaPedido}</div>
-        <div class="col col-6 text-start" data-label="EstadoPedido">${data.EstadoPedido}</div>
-        <button type="button" class="btn generar-btn mt-4 col col-7" onclick="simularPresion(${data.NumeroPedido})">Ver pedido</button>
+        <div class="col col-6 text-start" data-label="EstadoPedido" >${data.EstadoPedido}</div>
+       <button type="button" class="btn generar-btn mt-4 col col-7" onclick="simularPresion2()">Ver pedido</button>
     `;
         clientTableBody.appendChild(newRow);
         
     });
 }
-
+//data-modal-ref="Modificar"
+//<button type="button" class="btn generar-btn mt-4 col col-7" onclick="simularPresion2()">Ver pedido</button>
 
  export async function getProductos() {
     try {

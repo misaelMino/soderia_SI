@@ -7,7 +7,6 @@ router.get('/localidades', (req, res) => {
     utilsController.getLocalidades(req, res);
 });
 
-
 router.get('/barrios', (req, res) => {
     utilsController.getBarrios(req, res);
 });

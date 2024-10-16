@@ -20,7 +20,6 @@ const getClienteById = async (IdCliente) => {
     return result;
 };
 
-
 const getClienteParametrizado = async ({ IdCliente, Nombre, Apellido, NombreBarrio }) => {
     const connection = await database.getConnection();
     console.log(IdCliente + " ACA DESDE EL REPOSITORY");
@@ -59,15 +58,6 @@ const getClienteParametrizado = async ({ IdCliente, Nombre, Apellido, NombreBarr
     return result;
   };
   
-
-
-
-
-
-
-
-
-
 const addCliente = async (data) =>{
     const connection = await database.getConnection();
     const addCliente = await connection.query(
@@ -76,7 +66,6 @@ const addCliente = async (data) =>{
         [data.Nombre, data.Apellido, data.Direccion, data.DNI, data.Telefono, data.IdBarrio, data.IdTipoDoc]
       );      
 }
-
 
 const updateCliente = async (data) => {
     const connection = await database.getConnection();
@@ -88,8 +77,6 @@ const updateCliente = async (data) => {
     );
     console.log("Filas afectadas:", result.affectedRows);  // Log para ver cuántas filas se actualizaron
 };
-
-
 
 
 module.exports = {

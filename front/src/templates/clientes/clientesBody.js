@@ -163,7 +163,7 @@ export async function getClientes() {
       console.error('Error al obtener los clientes:', error);  
   }
 }
-let IdClientee;
+
 
 
 function cargarClientes(datos) {
@@ -186,7 +186,7 @@ function cargarClientes(datos) {
         
     });
 }
-
+let IdClientee;
 export function simularPresion(IdCliente) {
     IdClientee=IdCliente
     document.getElementById("prueba123").click();

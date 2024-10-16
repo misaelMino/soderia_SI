@@ -12,7 +12,6 @@ router.post('/add', (req, res) => {
     clienteController.addCliente(req, res); 
 });
 
-
 router.put('/modify/:id', (req, res) => {
   const data = req.body; 
   clienteController.updateCliente(req, res);  

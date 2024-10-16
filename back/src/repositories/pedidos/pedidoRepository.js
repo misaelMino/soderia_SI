@@ -95,10 +95,6 @@ const deletePedido = async (data) => {
 
 
 
-
-
-
-
 module.exports = {
     addPedido,
     updatePedido,
