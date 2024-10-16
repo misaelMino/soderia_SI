@@ -18,8 +18,25 @@ const getTipoDoc = async () => {
     return result;
 }
 
+const getProductos = async () => {
+    const connection = await database.getConnection();
+    const [result] = await connection.query("SELECT * FROM producto;");
+    return result;
+}
+
+
+const getMedioPago = async () => {
+    const connection = await database.getConnection();
+    const [result] = await connection.query("SELECT * FROM mediodepago;");
+    return result;
+}
+
+
+
 module.exports = {
     getLocalidades,
     getBarrios,
-    getTipoDoc
+    getTipoDoc,
+    getProductos,
+    getMedioPago
 }

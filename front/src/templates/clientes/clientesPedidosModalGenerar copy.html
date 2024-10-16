@@ -12,7 +12,7 @@
       <div class="modal-body">
         <form id="pedidoForm">
           <!-- Selección de cliente y tipo de pedido -->
-          <div class="mb-3">
+          <div class="mb-3 ">
             <label for="selectClient" class="form-label">Buscar Cliente</label>
             <select id="selectCliente" class="form-select">
               <!-- Opciones de clientes -->
@@ -24,33 +24,31 @@
             <label class="seleccionePago">Seleccione medio de pago</label>
             <div>
               <select id="medioDePago" class="form-select">
-                <!-- Opciones de medio de pago -->
+                <!-- Opciones de clientes -->
               </select>
             </div>
           </div>
 
-          <!-- Tabla de productos -->
-          <table class="table">
-            <thead>
-              <tr>
-                <th>Producto</th>
-                <th>Descripción</th>
-                <th>Precio Unitario</th>
-                <th>Cantidad</th>
-                <th>Subtotal</th>
-                <th>Acciones</th>
-              </tr>
-            </thead>
-            <tbody id="detallePedidoBody">
-              <!-- Filas dinámicas de productos se añadirán aquí -->
-            </tbody>
-          </table>
-
-          <button type="button" id="agregarProductoBtn" class="btn btn-primary">Agregar Producto</button>
+       
+          <tbody id="detallePedidoBody">
+            <tr>
+              <td>
+                <select class="form-select selectProducto" id="comboProdPedido">
+                </select>
+              </td>
+              <td class="descripcionProducto">detalle</td>
+              <td>
+                <input type="number" class="form-control cantidadProducto" min="1" value="1">
+              </td>
+              <td class="precioUnitario">precio unitario</td>
+              <td class="subtotal">subtotal</td>
+            </tr>
+          </tbody>
+          
 
           <!-- Total -->
           <div class="d-flex justify-content-end">
-            <h5>Total: $<span id="totalPedido">0</span></h5>
+            <h5>Total: <span id="totalPedido">0</span></h5>
           </div>
         </form>
       </div>

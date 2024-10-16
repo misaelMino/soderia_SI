@@ -1,9 +1,13 @@
 import { showAddProvForm, addProv, deleteProv } from './src/templates/proveedores/proveedores.js';
 import { clientesPedidosModal } from './src/templates/clientes/clientesPedido.js';
-import { habilitarEdicion, guardarPedido, eliminarFila } from './src/templates/clientes/clientesPedidosFunciones.js';
+import { cargarCombo } from './src/templates/clientes/clientesBody.js';
 import { cargarProductos } from './src/templates/productos/productos.js';
 import { loadScriptDrop } from './src/loadScript.js';
 import { loadScript } from './src/loadScript.js';
+
+
+
+
 
 
 function navigate(page) {
@@ -27,7 +31,6 @@ function navigate(page) {
                 window.simularPresion = simularPresion;
                 loadScriptDrop(content, 'clientes', page);
                 getClientes();
-
                 getBarrios("");
                 getTipoDoc("");
                 loadScriptDrop(content, 'clientes', page, clientesPedidosModal);
@@ -37,7 +40,29 @@ function navigate(page) {
 
             break;
         case 'clientesPedidos':
-            loadScriptDrop(content, 'clientes', page, clientesPedidosModal);
+                import('./src/templates/clientes/clientesPedidosFunciones.js').then((module) => {
+                    const { habilitarEdicion, guardarPedido, eliminarFila, calcularTotal, getClientesCombo, getMedioPago,
+                         calcularSubtotal, agregarFilaPedido, getProductos} = module;
+    
+                    // Asignar funciones al ámbito global
+                    window.agregarFilaPedido = agregarFilaPedido;
+                    window.calcularSubtotal = calcularSubtotal;
+                    window.calcularTotal = calcularTotal;
+                    window.eliminarFila = eliminarFila;
+                    window.habilitarEdicion = habilitarEdicion;
+                    window.guardarPedido = guardarPedido;
+                    window.getProductos = getProductos;
+                    window.getClientesCombo = getClientesCombo;
+                    window.getMedioPago = getMedioPago;
+
+
+                    loadScriptDrop(content, 'clientes', page);
+
+
+                    loadScriptDrop(content, 'clientes', page, clientesPedidosModal);
+                }).catch((error) => {
+                    console.error('Error al cargar el módulo de clientes:', error);
+                });
             break;
         case 'cuentascorrientes':
             loadScriptDrop(content, 'clientes', page, clientesPedidosModal);
@@ -75,6 +100,5 @@ window.addProv = addProv;
 window.deleteProv = deleteProv;
 window.clientesPedidosModal = clientesPedidosModal;
 window.cargarProductos = cargarProductos;
-window.habilitarEdicion = habilitarEdicion;
-window.eliminarFila = eliminarFila;
+window.cargarCombo = cargarCombo;
 

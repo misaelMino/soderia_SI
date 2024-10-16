@@ -16,6 +16,14 @@ router.get('/tipodoc', (req, res) => {
     utilsController.getTipoDoc(req, res);
 });
 
+router.get('/productos', (req, res) => {
+    utilsController.getProductos(req, res);
+});
+
+router.get('/mediodepago', (req, res) => {
+    utilsController.getMedioPago(req, res);
+});
+
 
 
 module.exports = router;

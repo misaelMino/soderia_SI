@@ -5,7 +5,8 @@ const getAllClientes = async () => {
     const connection = await database.getConnection();
     const [result] = await connection.query(`SELECT c.IdCliente, c.Nombre, c.Apellido, c.Direccion, c.DNI, c.IdTipoDoc, c.Telefono, c.FechaDeAlta, b.Nombre as NombreBarrio, b.IdBarrio
                                             FROM cliente AS c 
-                                            JOIN barrio as b ON c.idbarrio=b.idbarrio;`);
+                                            JOIN barrio as b ON c.idbarrio=b.idbarrio
+                                            ORDER BY c.Apellido ASC;`);
     return result;
 };
 

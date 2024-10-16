@@ -164,10 +164,7 @@ export async function getClientes() {
   }
 }
 let IdClientee;
-export function simularPresion(IdCliente) {
-    IdClientee=IdCliente
-    document.getElementById("prueba123").click();
-}
+
 
 function cargarClientes(datos) {
     //nombre, appelido, cuenta, barrio, direccion
@@ -188,12 +185,11 @@ function cargarClientes(datos) {
         clientTableBody.appendChild(newRow);
         
     });
+}
 
-        
-
-
-
-
+export function simularPresion(IdCliente) {
+    IdClientee=IdCliente
+    document.getElementById("prueba123").click();
 }
 
 function cargarModalCliente(data) {
@@ -225,8 +221,9 @@ function cargarModalCliente(data) {
     
 }
 
-function cargarCombo(datos, idElemento, campoId, campoNombre) {
+export function cargarCombo(datos, idElemento, campoId, campoNombre) {
     const comboSelect = document.getElementById(idElemento);
+    comboSelect.innerHTML = '';
     datos.forEach(data => {
         const newOption = document.createElement('option');
         newOption.value = data[campoId];  
