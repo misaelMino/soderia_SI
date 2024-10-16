@@ -40,7 +40,7 @@ function navigate(page) {
             break;
         case 'clientesPedidos':
                 import('./src/templates/clientes/clientesPedidosFunciones.js').then((module) => {
-                    const { simularPresion2, getClientesCombo, getMedioPago, getProductos, addPedido, getAllPedidos} = module;
+                    const { simularPresion2, getPedidoById, getClientesCombo, getMedioPago, getProductos, addPedido, getAllPedidos} = module;
     
                     // Asignar funciones al ámbito global
                     window.getProductos = getProductos;
@@ -48,6 +48,7 @@ function navigate(page) {
                     window.getMedioPago = getMedioPago;
                     window.addPedido = addPedido;
                     window.simularPresion2 = simularPresion2;
+                    window.getPedidoById = getPedidoById;
                     getAllPedidos();
                     loadScriptDrop(content, 'clientes', page);
 

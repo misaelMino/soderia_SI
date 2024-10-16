@@ -10,7 +10,7 @@ export async function getAllPedidos() {
       console.error('Error al obtener los clientes:', error);  
   }
 }
-let IdPedidoo;
+
 
 export async function getPedidoById() {
   try {
@@ -21,13 +21,45 @@ export async function getPedidoById() {
       const datos = await response.json();  // Parsear la respuesta como JSON
       console.log(datos);  // Ver los datos en la consola
       
-      cargarModalCliente(datos);  // Llamar a la función para mostrar los clientes en la tabla
+      cargarModalPedido(datos);  // Llamar a la función para mostrar los clientes en la tabla
   } catch (error) {
       console.error('Error al obtener los clientes:', error);  // Mostrar el error en la consola
   }
 }
 
 
+function cargarModalPedido(data) {
+  const ClienteInfo = data.Pedido; // Accede a la propiedad 'Pedido'
+  const DetallePedido = data.DetallePedido; // Accede a la propiedad 'DetallePedido'
+
+  console.debug(ClienteInfo);
+  console.debug(DetallePedido);
+
+  let Cliente = document.getElementById('modificarModCliente');
+  let MedioDePago = document.getElementById('modificarMedioDePago');
+  
+  
+  //let Direccion = document.getElementById('modDireccionCliente');
+  //let DNI = document.getElementById('modDNICliente');
+  //let Telefono = document.getElementById('modTelefonoCliente');
+  //let IdBarrio = document.getElementById('modIdBarrio');
+  //let IdTipoDoc = document.getElementById('modIdTipoDoc');
+  
+  Cliente.textContent = ClienteInfo.Cliente;
+  MedioDePago.value = ClienteInfo.MedioDePago;
+  //Direccion.value = data[0].Direccion;
+  //DNI.value = data[0].DNI;
+  //Telefono.value = data[0].Telefono;
+  //IdBarrio.value = data[0].IdBarrio;
+  //IdTipoDoc.value = data[0].IdTipoDoc;
+  
+  //document.getElementById('addClientForm').classList.add('d-none');
+  
+}
+
+
+
+let IdPedidoo;
 export function simularPresion2(IdPedido) {
   IdPedidoo = IdPedido
   document.getElementById("prueba1234").click();
@@ -47,7 +79,7 @@ function cargarPedidos(datos) {
         <div class="col col-4 text-start" data-label="Direccion">${data.Direccion}</div>
         <div class="col col-5 text-start" data-label="FechaPedido">${data.FechaPedido}</div>
         <div class="col col-6 text-start" data-label="EstadoPedido" >${data.EstadoPedido}</div>
-       <button type="button" class="btn generar-btn mt-4 col col-7" onclick="simularPresion2()">Ver pedido</button>
+       <button type="button" class="btn generar-btn mt-4 col col-7" onclick="simularPresion2(${data.NumeroPedido})">Ver pedido</button>
     `;
         clientTableBody.appendChild(newRow);
         
@@ -78,6 +110,7 @@ export async function getClientesCombo() {
           throw new Error('Error al obtener los clientes'); 
       }
       cargaDetallePedido();
+
       const datos = await response.json();  
       cargarComboCliente(datos,'selectCliente','IdCliente','Nombre', 'Apellido'); 
   } catch (error) {

@@ -21,6 +21,22 @@ const getAllPedidos = async (req, res) => {
   }
 };
 
+const getPedidoCompletoById = async (req, res) => {
+  const data = req.body;
+  const IdPedido = req.params.id
+  data.IdPedido = IdPedido;
+  console.log(data.IdPedido + " este es el ID");
+  try {
+      const pedidoData = await pedidoRepository.getPedidoCompletoById(data.IdPedido); // datos JSON desde la base de datos
+      res.json(pedidoData);
+     
+  } catch (error) {
+      res.status(500).json({ message: 'Error al obtener cliente, pedido inexistente' });
+  }
+};
+
+
+
 const updatePedido = async (req, res) => {
   const data = req.body;
   const IdPedido = req.params.id
@@ -44,6 +60,7 @@ const updatePedido = async (req, res) => {
 module.exports = {
   addPedido,
   updatePedido,
-  getAllPedidos
+  getAllPedidos,
+  getPedidoCompletoById
 };
 

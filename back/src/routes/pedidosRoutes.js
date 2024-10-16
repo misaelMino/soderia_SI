@@ -14,4 +14,9 @@ router.get('/get', (req, res) => {
     pedidoController.getAllPedidos(req, res); 
 });
 
+router.get('/get/:id', (req, res) => {
+    pedidoController.getPedidoCompletoById(req, res); 
+});
+
+
 module.exports = router;

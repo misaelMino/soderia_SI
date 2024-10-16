@@ -11,6 +11,32 @@ const getAllPedidos = async () => {
     return result;
 };
 
+const getPedidoCompletoById = async (IdPedido) => {
+    const connection = await database.getConnection();
+    console.debug("id pedido: " + IdPedido);
+    const [resultPedido] = await connection.query(`SELECT concat(cl.Apellido, ', ', cl.Nombre) as Cliente, me.Nombre as MedioDePago
+    FROM cliente as cl
+    JOIN pedido as pe ON cl.IdCliente = pe.IdCliente
+    JOIN mediodepago as me ON pe.IdMedioDePago = me.IdMedioDePago
+    WHERE pe.IdPedido = ?;`, [IdPedido]);
+
+
+    const [detallePedido] = await connection.query(`SELECT det.IdProducto, det.CantidadPedido
+    FROM productoxpedido as det
+    WHERE det.IdPedido = ?;`, [IdPedido]
+
+    );
+
+    const pedidoCompleto = {
+        Pedido: resultPedido[0],
+        DetallePedido: detallePedido
+    };
+
+    console.debug(pedidoCompleto);
+    return pedidoCompleto;
+};
+
+
 const addPedido = async (data, detallePedido) => {
     const connection = await database.getConnection();
 
@@ -99,5 +125,6 @@ module.exports = {
     addPedido,
     updatePedido,
     deletePedido,
-    getAllPedidos
+    getAllPedidos,
+    getPedidoCompletoById
 }
