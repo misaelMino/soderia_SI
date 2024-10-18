@@ -95,7 +95,7 @@ const updatePedido = async (detallePedido) => {
             `DELETE FROM ProductoXPedido
             WHERE IdPedido = ?
             AND IdProducto NOT IN (?);`,
-            [IdPedido, arrayProductoXPedido.map(producto => producto.IdProducto)]
+            [IdPedido, arrayProductoXPedido.map(producto => producto.idProducto)]
         );
         // Iterar sobre los productos y realizar UPDATE o INSERT. Si existe updatea y si no inserta. cortina la bochina
         const productoQueries = arrayProductoXPedido.map((producto) => {
@@ -103,7 +103,7 @@ const updatePedido = async (detallePedido) => {
                 `INSERT INTO ProductoXPedido (IdPedido, IdProducto, cantidadPedido)
                 VALUES (?, ?, ?)
                 ON DUPLICATE KEY UPDATE cantidadPedido = VALUES(cantidadPedido);`,
-                [IdPedido, producto.IdProducto, producto.cantidadPedido]
+                [IdPedido, producto.idProducto, producto.cantidadPedido]
             );
         });
         await Promise.all(productoQueries);

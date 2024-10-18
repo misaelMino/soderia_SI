@@ -1,6 +1,5 @@
 const database = require("../../config/database");
 
-
 const getAllClientes = async () => {
     const connection = await database.getConnection();
     const [result] = await connection.query(`SELECT c.IdCliente, c.Nombre, c.Apellido, c.Direccion, c.DNI, c.IdTipoDoc, c.Telefono, c.FechaDeAlta, b.Nombre as NombreBarrio, b.IdBarrio
@@ -20,7 +19,7 @@ const getClienteById = async (IdCliente) => {
     return result;
 };
 
-const getClienteParametrizado = async ({ IdCliente, Nombre, Apellido, NombreBarrio }) => {
+const getClienteParametrizado = async ({ Nombre, Apellido, NombreBarrio, Direccion }) => {
     const connection = await database.getConnection();
     console.log(IdCliente + " ACA DESDE EL REPOSITORY");
   
@@ -34,14 +33,9 @@ const getClienteParametrizado = async ({ IdCliente, Nombre, Apellido, NombreBarr
   
     const params = [];
   
-    if (IdCliente) {
-      query += ` AND c.IdCliente = ?`;
-      params.push(IdCliente);
-    }
-  
     if (Nombre) {
-      query += ` AND c.Nombre LIKE ?`;
-      params.push(`%${Nombre}%`);
+      query += ` AND c.Nombre = ?`;
+      params.push(Nombre);
     }
   
     if (Apellido) {
@@ -52,6 +46,11 @@ const getClienteParametrizado = async ({ IdCliente, Nombre, Apellido, NombreBarr
     if (NombreBarrio) {
       query += ` AND b.Nombre LIKE ?`;
       params.push(`%${NombreBarrio}%`);
+    }
+  
+    if (Direccion) {
+      query += ` AND c.Direccion LIKE ?`;
+      params.push(`%${Direccion}%`);
     }
   
     const [result] = await connection.query(query, params);

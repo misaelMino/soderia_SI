@@ -41,8 +41,9 @@ const updatePedido = async (req, res) => {
   const data = req.body;
   const IdPedido = req.params.id
   data.IdPedido = IdPedido;
-  console.log("id pedido: " + IdPedido);
-  console.log("data: " +data.IdPedido);
+  console.log("id pedidoAAAAA: " + IdPedido);
+  console.log("dataAAAAAA: " +data.IdPedido);
+  console.log(data);
   try {
     await pedidoRepository.updatePedido(data);
     res.status(201).json({ message: 'Pedido actualizado correctamente' });

@@ -6,6 +6,8 @@ router.get('/get', clienteController.getClientes);
 
 router.get('/get/:id', clienteController.getClienteById);
 
+router.get('/get/filters', clienteController.getClienteById);
+
 router.post('/add', (req, res) => {
     const data = req.body; 
     debugger;

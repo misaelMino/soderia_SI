@@ -5,10 +5,6 @@ import { cargarProductos } from './src/templates/productos/productos.js';
 import { loadScriptDrop } from './src/loadScript.js';
 import { loadScript } from './src/loadScript.js';
 
-
-
-
-
 function navigate(page) {
     let content = document.getElementById('content');
 
@@ -17,39 +13,32 @@ function navigate(page) {
             loadScript(content, page);
             break;
         case 'clientes':
-            // Cargar el script de clientes dinámicamente cuando se navega a esta sección
             import('./src/templates/clientes/clientesBody.js').then((module) => {
                 const { simularPresion, getClientes, getClienteById, updateCliente, getTipoDoc, getBarrios, showAddClientForm, addClient, deleteClient } = module;
-
-                // Asignar funciones al ámbito global
+                loadScriptDrop(content, 'clientes', page, clientesPedidosModal);
                 window.showAddClientForm = showAddClientForm;
                 window.addClient = addClient;
                 window.deleteClient = deleteClient;
                 window.getClienteById = getClienteById;
                 window.updateCliente = updateCliente;
                 window.simularPresion = simularPresion;
-                loadScriptDrop(content, 'clientes', page);
                 getClientes();
                 getBarrios("");
                 getTipoDoc("");
-                loadScriptDrop(content, 'clientes', page, clientesPedidosModal);
-                
             }).catch((error) => {
                 console.error('Error al cargar el módulo de clientes:', error);
             });
-
             break;
         case 'clientesPedidos':
                 import('./src/templates/clientes/clientesPedidosFunciones.js').then((module) => {
-                    const { simularPresion2, getPedidoById, getClientesCombo, getMedioPago, getProductos, addPedido, getAllPedidos} = module;
-    
-                    // Asignar funciones al ámbito global
+                    const { updatePedido, simularPresion2, getPedidoById, getClientesCombo, getMedioPago, getProductos, addPedido, getAllPedidos} = module;
                     window.getProductos = getProductos;
                     window.getClientesCombo = getClientesCombo;
                     window.getMedioPago = getMedioPago;
                     window.addPedido = addPedido;
                     window.simularPresion2 = simularPresion2;
                     window.getPedidoById = getPedidoById;
+                    window.updatePedido = updatePedido;
                     getAllPedidos();
                     loadScriptDrop(content, 'clientes', page, clientesPedidosModal);
                 }).catch((error) => {
@@ -76,21 +65,20 @@ function navigate(page) {
     }
 }
 
-// Añadir EventListeners al cargar el DOM
+// agregar listeners de datanav al cargar el DOM
 document.addEventListener('DOMContentLoaded', function () {
     document.querySelectorAll('[data-nav]').forEach(function (element) {
         element.addEventListener('click', function () {
             navigate(this.getAttribute('data-nav'));
         });
     });
-    navigate('clientesPedidos');
+    navigate('clientes');
 });
 
 
 window.showAddProvForm = showAddProvForm;
 window.addProv = addProv;
 window.deleteProv = deleteProv;
-
 window.cargarProductos = cargarProductos;
 window.cargarCombo = cargarCombo;
 

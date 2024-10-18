@@ -13,11 +13,67 @@
 
         <div class="container">
 
-            <div class="container d-flex justify-content-center">
-                <input type="search" class="form-control rounded pruebera22 barra-busqueda"
-                    placeholder="Buscar clientes" aria-label="Search" aria-describedby="search-addon" />
-                <button type="button" class="btn generar-btn" data-mdb-ripple-init>buscar</button>
+            <div class="container d-flex flex-column align-items-center">
+                <fieldset class="border p-4 rounded">
+                    <legend class="w-auto px-2">Filtros de búsqueda</legend>
+            
+                    <div class="row">
+                        <!-- Primera fila: Nombre y Apellido -->
+                        <div class="col-md-6">
+                            <div class="d-flex align-items-center mb-2">
+                                <input class="form-check-input me-2" type="checkbox" id="checkNombre">
+                                <label class="form-label me-2" for="inputNombre">Nombre</label>
+                                <input type="text" id="inputNombre" class="form-control" placeholder="Ingrese el nombre" disabled>
+                            </div>
+                        </div>
+            
+                        <div class="col-md-6">
+                            <div class="d-flex align-items-center mb-2">
+                                <input class="form-check-input me-2" type="checkbox" id="checkApellido">
+                                <label class="form-label me-2" for="inputApellido">Apellido</label>
+                                <input type="text" id="inputApellido" class="form-control" placeholder="Ingrese el apellido" disabled>
+                            </div>
+                        </div>
+                    </div>
+            
+                    <div class="row">
+                        <!-- Segunda fila: Dirección y Barrio -->
+                        <div class="col-md-6">
+                            <div class="d-flex align-items-center mb-2">
+                                <input class="form-check-input me-2" type="checkbox" id="checkDireccion">
+                                <label class="form-label me-2" for="inputDireccion">Dirección</label>
+                                <input type="text" id="inputDireccion" class="form-control" placeholder="Ingrese la dirección" disabled>
+                            </div>
+                        </div>
+            
+                        <div class="col-md-6">
+                            <div class="d-flex align-items-center mb-2">
+                                <input class="form-check-input me-2" type="checkbox" id="checkBarrio">
+                                <label class="form-label me-2" for="inputBarrio">Barrio</label>
+                                <input type="text" id="inputBarrio" class="form-control" placeholder="Ingrese el barrio" disabled>
+                            </div>
+                        </div>
+                    </div>
+            
+                    <div class="row">
+                        <!-- Tercera fila: Cuenta (clienteID) -->
+                        <div class="col-md-12">
+                            <div class="d-flex align-items-center mb-2">
+                                <input class="form-check-input me-2" type="checkbox" id="checkCuenta">
+                                <label class="form-label me-2" for="inputCuenta">Cuenta (clienteID)</label>
+                                <input type="text" id="inputCuenta" class="form-control" placeholder="Ingrese la cuenta" disabled>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            
+                <button type="button" class="btn btn-primary mt-3" id="btnBuscar">Buscar</button>
             </div>
+            
+            
+
+
+
             <br>
             <br>
 
@@ -34,41 +90,41 @@
                    
                     <!-- aca van los clientes -->
                 </div>
-                <div id="addClientForm" class="d-none">
-                    <!--//nombre, apellido, direccion, dni, telefino, barrio, tipodoc-->
-                    <h2>Agregar Cliente</h2>
-                    <form onsubmit="addClient(event)">
-                        <div class="mb-3">
-                            <label for="nombreCliente" class="form-label">Nombre</label>
-                            <input type="text" class="form-control" id="nombreCliente" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="apellidoCliente" class="form-label">Apellido</label>
-                            <input type="text" class="form-control" id="apellidoCliente" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="direccionCliente" class="form-label">Dirección</label>
-                            <input type="text" class="form-control" id="direccionCliente" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="telefonoCliente" class="form-label">Teléfono</label>
-                            <input type="text" class="form-control" id="telefonoCliente" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="documento">Selecciona tipo de documento:</label>
-                            <select id="IdTipoDoc" name="tipoDoc">
-                            </select>
-                            <label for="DNICliente" class="form-label">Número</label>
-                            <input type="number" class="form-control" id="DNICliente" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="barrios">Selecciona barrio:</label>
-                            <select id="IdBarrio" name="Barrio">
-                            </select>
-                        </div>
-                        <button id="enviarAgregado" type="submit" class="btn btn-primary mb-3">Agregar Cliente</button>
-                    </form>
+                <div id="addClientForm" class="d-none d-flex justify-content-center align-items-center vh-100">
+                    <div class="border rounded p-4 bg-light" style="width: 400px;">
+                        <h2 class="text-center mb-4">Agregar Cliente</h2>
+                        <form onsubmit="addClient(event)">
+                            <div class="mb-3">
+                                <label for="nombreCliente" class="form-label">Nombre</label>
+                                <input type="text" class="form-control" id="nombreCliente" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="apellidoCliente" class="form-label">Apellido</label>
+                                <input type="text" class="form-control" id="apellidoCliente" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="direccionCliente" class="form-label">Dirección</label>
+                                <input type="text" class="form-control" id="direccionCliente" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="telefonoCliente" class="form-label">Teléfono</label>
+                                <input type="text" class="form-control" id="telefonoCliente" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="documento" class="form-label">Selecciona tipo de documento:</label>
+                                <select id="IdTipoDoc" name="tipoDoc" class="form-select mb-2" required></select>
+                                <label for="DNICliente" class="form-label">Número</label>
+                                <input type="number" class="form-control" id="DNICliente" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="barrios" class="form-label">Selecciona barrio:</label>
+                                <select id="IdBarrio" name="Barrio" class="form-select" required></select>
+                            </div>
+                            <button id="enviarAgregado" type="submit" class="btn btn-primary w-100" onclick="showAddClientForm()">Agregar Cliente</button>
+                        </form>
+                    </div>
                 </div>
+                
 
 
 
